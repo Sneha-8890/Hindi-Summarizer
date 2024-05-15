@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text, PDF, URL Uploader</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.9); /* Increased opacity for better readability */
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            transform: scale(1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        }
+        h2 {
+            font-size: 24px; /* Larger font size for better visibility */
+            color: #333; /* Dark color for contrast */
+            margin-bottom: 20px;
+        }
+        label {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #333; /* Ensuring labels are visible */
+        }
+        textarea, select, input, button {
+            display: block;
+            width: 100%; /* Full width for alignment */
+            padding: 12px; /* More padding for aesthetics */
+            margin: 10px 0; /* Adjusted margin for better spacing */
+            border: 2px solid #ccc;
+            border-radius: 6px;
+            background: transparent;
+            color: #333;
+            transition: all 0.3s ease;
+            outline: none; /* Remove focus outline */
+        }
+        select:hover, input[type="text"]:hover, input[type="file"]:hover, textarea:hover,
+        select:focus, input[type="text"]:focus, input[type="file"]:focus, textarea:focus {
+            border-color: #7f8cfd; /* Unified focus and hover color */
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        button:hover {
+            background-color: #45a049;
+            transform: scale(1.05); /* Slight scale on hover for button */
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Upload Text, PDF, or URL</h2>
+        <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
+            <label for="uploadType">Select upload type:</label>
+            <select id="uploadType" name="uploadType" onchange="toggleUpload()">
+                <option value="" disabled selected>Select an option</option>
+                <option value="text">Text</option>
+                <option value="pdf">PDF</option>
+                <option value="url">URL</option>
+            </select>
+            <textarea id="textInput" name="textInput" class="hidden" placeholder="Enter text here..."></textarea>
+            <input type="file" id="fileInput" name="fileInput" class="hidden">
+            <input type="text" id="urlInput" name="urlInput" class="hidden" placeholder="Enter URL here...">
+            <input type="number" name="summaryPercent" placeholder="Enter summary percentage" required>
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+    <script>
+        function toggleUpload() {
+            var uploadType = document.getElementById("uploadType").value;
+            var textInput = document.getElementById("textInput");
+            var fileInput = document.getElementById("fileInput");
+            var urlInput = document.getElementById("urlInput");
+
+            textInput.classList.add("hidden");
+            fileInput.classList.add("hidden");
+            urlInput.classList.add("hidden");
+
+            if (uploadType === "text") {
+                textInput.classList.remove("hidden");
+            } else if (uploadType === "pdf") {
+                fileInput.classList.remove("hidden");
+            } else if (uploadType === "url") {
+                urlInput.classList.remove("hidden");
+            }
+        }
+    </script>
+</body>
+</html>

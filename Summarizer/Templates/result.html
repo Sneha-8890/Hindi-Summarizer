@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary Result</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        h1 {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            transform: perspective(500px) rotateX(10deg);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        h1:hover {
+            transform: perspective(500px) rotateX(-5deg);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        p {
+            width: 80%;
+            margin: 20px auto;
+            font-size: 18px;
+            line-height: 1.6;
+            background: rgba(255, 255, 255, 0.1);
+            border-left: 5px solid rgba(255, 255, 255, 0.4);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        p:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <h1>Abstractive Summary</h1>
+    <p>{{ text }}</p>
+    
+    <p>F-Score: {{ abstractive_fscore }}</p>
+
+    <h1>Extractive Summary</h1>
+    <p>{{ extractive_summary }}</p>
+    
+    <p>F-Score: {{ extractive_fscore }}</p>
+
+</body>
+
+</html>
